@@ -33,13 +33,12 @@ services:
     command: rails server -b 0.0.0.0
 
   front:
-    container_name: web
-    tty: true
     build:
-      context: web/
+      context: front/
       dockerfile: Dockerfile
-    ports:
-      - 8080:3000
+    container_name: web
     volumes:
-      - ./web/app:/app
-    command: sh -c 'yarn install; yarn dev'
+      - ./front/app:/usr/src/app
+    command: 'yarn dev'
+    ports:
+      - "4001:3000"
